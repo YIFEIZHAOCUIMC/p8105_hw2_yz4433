@@ -31,6 +31,14 @@ trans_ent %>%
   distinct
 ```
 
+### ADA compliant
+```{r}
+trans_ent %>% 
+  filter(ada == TRUE) %>% 
+  select(station_name, line) %>% 
+  distinct
+```
+
 ## Problem 2
 ### Manipulate the Mr.Trash Wheel sheet
 ```{r}
