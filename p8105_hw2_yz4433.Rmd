@@ -24,7 +24,7 @@ data_mr = data_mr[,-15:-16]
 data_mr[,13] = as.integer(unlist(round(data_mr[,13])))
 ```
 
-### Manipute the Professor Trash Wheel sheet and make combination
+### Manipulate the Professor Trash Wheel sheet and make combination
 ```{r}
 data_pro = read_excel("data/Trash Wheel Collection Data.xlsx",2) %>% 
   janitor::clean_names() %>% 
@@ -38,3 +38,15 @@ data_trash =
   select(group, everything())
 ```
 For Mr. Trash Wheel data, a `r nrow(data_mr)` $\times$ `r ncol(data_mr)` dataset, the key variables are date and weight_tons, and it illustrates the amount of total litter and litter type from May 2014 to July 2022. For Professor Trash Wheel data, a `r nrow(data_pro)` $\times$ `r ncol(data_pro)` dataset, the key variables are also date and weight_tons, and it illustrates the amount of  precipitation and litter type from Jan 2017 to July 2022. The final resulting dataset has 641 observations. The key variables are date and weight_tons. After calculation, the total weight of trash collected by Professor Trash Wheel is `r sum(data_pro$weight_tons)`, and the total number of sports balls collected by Mr. Trash Wheel in 2020 is `r sum(data_mr$weight_tons[382:452])`.
+
+## Problem 3
+### pols-month manipulation
+```{r}
+data_pols = 
+  read_csv("data/fivethirtyeight_datasets/pols-month.csv") %>%
+  janitor::clean_names() %>% 
+  separate(mon, into = c("year", "month", "day")) %>%
+  mutate(president = "group")
+data_pols$president = ifelse(data_pols$prez_gop != 0, 'gop', 'dem') 
+data_pols = select(data_pols, -day, -prez_dem, -prez_gop)
+data_pols$month = month.abb[as.numeric(unlist(data_pols$month))]
