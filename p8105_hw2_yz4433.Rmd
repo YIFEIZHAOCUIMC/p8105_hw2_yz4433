@@ -86,12 +86,13 @@ data_pro = read_excel("data/Trash Wheel Collection Data.xlsx",2) %>%
   add_column(sports_balls = 0, .after = "chip_bags") %>% 
   mutate(group = "professor")
 data_pro[,3] = as.character(unlist(data_pro[,3]))
+# Combinationa and get data_trash
 data_trash =
   bind_rows(data_mr, data_pro) %>%
   janitor::clean_names() %>%
   select(group, everything())
 ```
-For Mr. Trash Wheel data, a `r nrow(data_mr)` $\times$ `r ncol(data_mr)` dataset, the key variables are date and weight_tons, and it illustrates the amount of total litter and litter type from May 2014 to July 2022. For Professor Trash Wheel data, a `r nrow(data_pro)` $\times$ `r ncol(data_pro)` dataset, the key variables are also date and weight_tons, and it illustrates the amount of  precipitation and litter type from Jan 2017 to July 2022. The final resulting dataset has 641 observations. The key variables are date and weight_tons. After calculation, the total weight of trash collected by Professor Trash Wheel is `r sum(data_pro$weight_tons)`, and the total number of sports balls collected by Mr. Trash Wheel in 2020 is `r sum(data_mr$weight_tons[382:452])`.
+For Mr. Trash Wheel data, a `r nrow(data_mr)` $\times$ `r ncol(data_mr)` dataset, the key variables are date and weight_tons, and it illustrates the amount of total litter and litter type from May 2014 to July 2022. For Professor Trash Wheel data, a `r nrow(data_pro)` $\times$ `r ncol(data_pro)` dataset, the key variables are also date and weight_tons, and it illustrates the amount of  precipitation and litter type from Jan 2017 to July 2022. The final resulting dataset has 641 observations. The key variables are date and weight_tons. After calculation, the total weight of trash collected by Professor Trash Wheel is `r sum(data_pro$weight_tons)`, and the total number of sports balls collected by Mr. Trash Wheel in 2020 is `r sum(data_mr$sports_balls[381:452])`.
 
 ## Problem 3
 ### pols-month manipulation
