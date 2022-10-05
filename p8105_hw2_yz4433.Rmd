@@ -1,7 +1,7 @@
 ---
 title: "p8105_hw2_yz4433"
 author: "Yifei Zhao"
-date: "2022-10-01"
+date: "2022-10-05"
 output: github_document
 ---
 
@@ -25,14 +25,14 @@ trans_ent = read_csv("data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv",
 ```
 
 ### Distinct Station
-```{r}
+```{r, results = 'hide'}
 trans_ent %>% 
   select(station_name, line) %>% 
   distinct
 ```
 
 ### ADA compliant
-```{r}
+```{r, results = 'hide'}
 trans_ent %>% 
   filter(ada == TRUE) %>% 
   select(station_name, line) %>% 
@@ -45,6 +45,26 @@ trans_ent %>%
   filter(vending == "NO") %>% 
   pull(entry) %>% 
   mean
+```
+
+### Reformat data and do calculations
+```{r, results = 'hide'}
+trans_ent %>% 
+  pivot_longer(
+    route1:route11,
+    names_to = "route_num",
+    values_to = "route") %>% 
+  filter(route == "A") %>% 
+  select(station_name, line) %>% 
+  distinct
+trans_ent %>% 
+  pivot_longer(
+    route1:route11,
+    names_to = "route_num",
+    values_to = "route") %>% 
+  filter(route == "A", ada == TRUE) %>% 
+  select(station_name, line) %>% 
+  distinct
 ```
 
 ## Problem 2
