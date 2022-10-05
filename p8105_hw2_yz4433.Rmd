@@ -39,6 +39,14 @@ trans_ent %>%
   distinct
 ```
 
+### Proportion of station entrances or exits without vending allow entrance
+```{r}
+trans_ent %>% 
+  filter(vending == "NO") %>% 
+  pull(entry) %>% 
+  mean
+```
+
 ## Problem 2
 ### Manipulate the Mr.Trash Wheel sheet
 ```{r}
