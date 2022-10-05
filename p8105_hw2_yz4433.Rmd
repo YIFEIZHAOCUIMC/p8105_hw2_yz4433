@@ -50,3 +50,19 @@ data_pols =
 data_pols$president = ifelse(data_pols$prez_gop != 0, 'gop', 'dem') 
 data_pols = select(data_pols, -day, -prez_dem, -prez_gop)
 data_pols$month = month.abb[as.numeric(unlist(data_pols$month))]
+```
+
+### snp manipulation
+```{r}
+data_snp = 
+  read_csv("data/fivethirtyeight_datasets/snp.csv") %>% 
+  janitor::clean_names() %>% 
+separate(date, into = c("month", "day", "year")) %>%
+select(year, month, close, -day)
+data_snp$month = month.abb[as.numeric(unlist(data_snp$month))]
+data_snp$tw = c('20')
+data_snp$ni = c('19')
+data_snp[1:187,] = mutate(data_snp[1:187,], year = str_c(tw,year))
+data_snp[188:787,] = mutate(data_snp[188:787,], year = str_c(ni,year))
+data_snp = data_snp[,-4:-5]
+```
