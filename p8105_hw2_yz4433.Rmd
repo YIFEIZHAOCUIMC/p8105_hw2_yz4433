@@ -79,3 +79,9 @@ data_unem =
 data_unem[,1] = as.character(unlist(data_unem[,1]))
 data_unem = data_unem[-811:-816,]
 ```
+
+### Merge datasets
+```{r}
+middata = full_join(data_pols, data_snp, by = c("year","month"))
+finaldata = full_join(middata, data_unem, by = c("year","month"))
+```
