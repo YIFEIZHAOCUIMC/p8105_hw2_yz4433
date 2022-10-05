@@ -24,6 +24,13 @@ trans_ent = read_csv("data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv",
   mutate(entry = ifelse(entry == "YES", TRUE, FALSE))
 ```
 
+### Distinct Station
+```{r}
+trans_ent %>% 
+  select(station_name, line) %>% 
+  distinct
+```
+
 ## Problem 2
 ### Manipulate the Mr.Trash Wheel sheet
 ```{r}
