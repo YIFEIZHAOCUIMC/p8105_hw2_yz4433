@@ -1,0 +1,31 @@
+---
+title: "p8105_hw2_yz4433"
+author: "Yifei Zhao"
+date: "2022-10-01"
+output: github_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, message = FALSE)
+library(tidyverse)
+library(readxl)
+```
+
+## Problem 1
+
+## Problem 2
+### Manipulate the Mr.Trash Wheel sheet
+```{r}
+data_mr = read_excel("data/Trash Wheel Collection Data.xlsx") %>% 
+  janitor::clean_names() %>% 
+  drop_na(dumpster) %>% 
+  mutate(group = "mr")
+data_mr = data_mr[,-15:-16]
+data_mr[,13] = as.integer(unlist(round(data_mr[,13])))
+  
+# data_mr = data_mr[,-15:-16]
+# data_mr = janitor::clean_names(data_mr)
+# data_mr = drop_na(data_mr, dumpster)
+# data_mr[,13] = as.integer(unlist(round(data_mr[,13])))
+# data_mr = mutate(data_mr, group = "mr")
+```
